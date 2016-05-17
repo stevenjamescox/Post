@@ -20,8 +20,8 @@ struct Post: JSONSavableObject {
     let timestamp: NSTimeInterval
     let identifier: NSUUID
     
-    var endpoint: NSURL {
-        return (PostController.baseURL?.URLByAppendingPathComponent("posts").URLByAppendingPathComponent(self.identifier.UUIDString).URLByAppendingPathExtension("json"))!
+    var endpoint: NSURL? {
+        return (PostController.baseURL?.URLByAppendingPathComponent("posts").URLByAppendingPathComponent(self.identifier.UUIDString).URLByAppendingPathExtension("json"))
     }
     
     var jsonValue: [String: AnyObject] {
@@ -47,14 +47,13 @@ struct Post: JSONSavableObject {
         
         guard let username = json[UsernameKey] as? String,
             let text = json[TextKey] as? String,
-            let timestamp = json[TimestampKey] as? Double else { return nil }
+            let timestamp = json[TimestampKey] as? Double,
+            let identifier = NSUUID(UUIDString: identifier) else { return nil }
         
         self.username = username
         self.text = text
         self.timestamp = NSTimeInterval(floatLiteral: timestamp)
-        self.identifier = NSUUID(UUIDString: identifier)!
-        
-        // TODO Fix
+        self.identifier = identifier
     }
     
 }

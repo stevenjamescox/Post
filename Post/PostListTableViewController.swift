@@ -12,31 +12,19 @@ class PostListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.estimatedRowHeight = 80
+        tableView.rowHeight = UITableViewAutomaticDimension
 
         PostController.sharedController.observers.append(self)
+        // TODO decide between observers or just one delegate
+        // TODO decide on shared instance vs single instance
+        // TODO consider doing the shared instance with multiple observers in Timeline/Chat
     }
 
     @IBAction func newPostTapped(sender: AnyObject) {
     
-        let alertController = UIAlertController(title: "New Post", message: nil, preferredStyle: .Alert)
-        
-        alertController.addTextFieldWithConfigurationHandler { (textField) in
-            
-            textField.placeholder = "What's up?"
-        }
-        
-        let postAction = UIAlertAction(title: "Post", style: .Default) { (action) in
-            
-            if let text = alertController.textFields?.first?.text {
-                PostController.sharedController.addPost("Caleb Hicks", text: text)
-            }
-        }
-        alertController.addAction(postAction)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        
-        presentViewController(alertController, animated: true, completion: nil)
+        presentNewPostAlert()
     }
     
     @IBAction func refreshControlPulled(sender: UIRefreshControl) {
@@ -47,8 +35,53 @@ class PostListTableViewController: UITableViewController {
         }
     }
     
-    // MARK: - Table view data source
+    func presentNewPostAlert() {
+        let alertController = UIAlertController(title: "New Post", message: nil, preferredStyle: .Alert)
+        
+        var usernameTextField: UITextField?
+        var messageTextField: UITextField?
+        
+        alertController.addTextFieldWithConfigurationHandler { (usernameField) in
+            usernameField.placeholder = "Display name"
+            usernameTextField = usernameField
+        }
+        
+        alertController.addTextFieldWithConfigurationHandler { (messageField) in
+            
+            messageField.placeholder = "What's up?"
+            messageTextField = messageField
+        }
+        
+        let postAction = UIAlertAction(title: "Post", style: .Default) { (action) in
+            
+            guard let username = usernameTextField?.text,
+                let text = messageTextField?.text else {
+                
+                    self.presentErrorAlert()
+                    return
+            }
+            
+            PostController.sharedController.addPost(username, text: text)
+        }
+        alertController.addAction(postAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func presentErrorAlert() {
+        
+        let alertController = UIAlertController(title: "Uh oh!", message: "You may be missing information, or have network connectivity issues. Please try again.", preferredStyle: .Alert)
 
+        let cancelAction = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
+        
+        alertController.addAction(cancelAction)
+    }
+    
+    // MARK: - Table view data source
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return PostController.sharedController.posts.count
@@ -64,7 +97,6 @@ class PostListTableViewController: UITableViewController {
 
         return cell
     }
-
 }
 
 extension PostListTableViewController: PostControllerObserver {

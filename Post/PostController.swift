@@ -37,13 +37,6 @@ class PostController {
         }
     }
     
-    func removePost(post: Post) {
-        
-        post.delete {
-            self.fetchPosts()
-        }
-    }
-    
     // MARK: - Persistence
     
     func fetchPosts(completion: (() -> Void)? = nil) {

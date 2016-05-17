@@ -10,22 +10,24 @@ import Foundation
 
 protocol JSONSavableObject {
     
-    var endpoint: NSURL { get }
+    var endpoint: NSURL? { get }
     var jsonValue: [String: AnyObject] { get }
     
     func save(completion: (() -> ())?)
-    func update(completion: (() -> ())?)
-    func delete(completion: (() -> ())?)
+    
+    // TODO add black diamond of updating or deleting
 }
 
 extension JSONSavableObject {
     
     func save(completion: (() -> ())? = nil) {
         
-        NetworkController.performRequestForURL(self.endpoint, httpMethod: .Put, data: self.jsonData) { (data, error) in
+        guard let endpoint = self.endpoint else { fatalError("URL optional is nil") }
+        
+        NetworkController.performRequestForURL(endpoint, httpMethod: .Put, data: self.jsonData) { (data, error) in
             
             if error != nil {
-                // perform marvellous error handling here
+                print("Error: \(error)")
             } else {
                 print("Successfully saved data to endpoint.")
             }
@@ -36,41 +38,9 @@ extension JSONSavableObject {
         }
     }
     
-    func update(completion: (() -> ())? = nil) {
-        
-        NetworkController.performRequestForURL(self.endpoint, httpMethod: .Patch, data: self.jsonData) { (data, error) in
-            
-            if error != nil {
-                // perform marvellous error handling here
-            } else {
-                print("Successfully patched data to endpoint.")
-            }
-            
-            if let completion = completion {
-                completion()
-            }
-        }
-    }
-    
-    func delete(completion: (() -> ())? = nil) {
-        
-        NetworkController.performRequestForURL(self.endpoint, httpMethod: .Delete, data: self.jsonData) { (data, error) in
-            
-            if error != nil {
-                // perform marvellous error handling here
-            } else {
-                print("Successfully deleted data from endpoint.")
-            }
-            
-            if let completion = completion {
-                completion()
-            }
-        }
-    }
-    
     var jsonData: NSData? {
         
-        return try! NSJSONSerialization.dataWithJSONObject(self.jsonValue, options: NSJSONWritingOptions.PrettyPrinted)
+        return try? NSJSONSerialization.dataWithJSONObject(self.jsonValue, options: NSJSONWritingOptions.PrettyPrinted)
     }
     
     var jsonString: NSString {
@@ -79,4 +49,6 @@ extension JSONSavableObject {
         
         return string
     }
+    
+    // TODO decide if the debugging is worth keeping this in the project
 }

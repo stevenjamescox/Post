@@ -18,18 +18,11 @@ class NetworkController {
         case Delete = "DELETE"
     }
     
-    static func performRequestForURL(url: NSURL, httpMethod: HTTPMethod, data: NSData?, headers: [String: String]? = nil, completion:((data: NSData?, error: NSError?) -> Void)?) {
+    static func performRequestForURL(url: NSURL, httpMethod: HTTPMethod, data: NSData?, completion:((data: NSData?, error: NSError?) -> Void)?) {
         
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = httpMethod.rawValue
         request.HTTPBody = data
-        
-        if let headers = headers {
-            for (headerKey, value) in headers {
-                
-                request.addValue(value, forHTTPHeaderField: headerKey)
-            }
-        }
         
         let session = NSURLSession.sharedSession()
         
@@ -42,5 +35,4 @@ class NetworkController {
         
         dataTask.resume()
     }
-    
 }
