@@ -16,7 +16,6 @@
 		686132191CD92A5500A46449 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686132181CD92A5500A46449 /* NetworkController.swift */; };
 		68D7B2B81CEA4AB500AC1655 /* PostListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B2B71CEA4AB500AC1655 /* PostListTableViewController.swift */; };
 		68D7B2BA1CEA7CED00AC1655 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B2B91CEA7CED00AC1655 /* Post.swift */; };
-		68D7B2BC1CEA7F2400AC1655 /* JSONSavableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B2BB1CEA7F2400AC1655 /* JSONSavableObject.swift */; };
 		68D7B2BE1CEA7F9D00AC1655 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D7B2BD1CEA7F9D00AC1655 /* PostController.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,7 +52,6 @@
 		686132181CD92A5500A46449 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		68D7B2B71CEA4AB500AC1655 /* PostListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListTableViewController.swift; sourceTree = "<group>"; };
 		68D7B2B91CEA7CED00AC1655 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		68D7B2BB1CEA7F2400AC1655 /* JSONSavableObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSavableObject.swift; sourceTree = "<group>"; };
 		68D7B2BD1CEA7F9D00AC1655 /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,7 +108,6 @@
 				68D7B2B71CEA4AB500AC1655 /* PostListTableViewController.swift */,
 				68D7B2B91CEA7CED00AC1655 /* Post.swift */,
 				68D7B2BD1CEA7F9D00AC1655 /* PostController.swift */,
-				68D7B2BB1CEA7F2400AC1655 /* JSONSavableObject.swift */,
 				686132181CD92A5500A46449 /* NetworkController.swift */,
 				686131F11CD92A0B00A46449 /* Assets.xcassets */,
 				686131F31CD92A0B00A46449 /* LaunchScreen.storyboard */,
@@ -273,7 +270,6 @@
 				686131EB1CD92A0B00A46449 /* AppDelegate.swift in Sources */,
 				686132191CD92A5500A46449 /* NetworkController.swift in Sources */,
 				68D7B2BA1CEA7CED00AC1655 /* Post.swift in Sources */,
-				68D7B2BC1CEA7F2400AC1655 /* JSONSavableObject.swift in Sources */,
 				68D7B2BE1CEA7F9D00AC1655 /* PostController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Post: JSONSavableObject {
+struct Post {
     
     private let UsernameKey = "username"
     private let TextKey = "text"
@@ -19,21 +19,6 @@ struct Post: JSONSavableObject {
     let text: String
     let timestamp: NSTimeInterval
     let identifier: NSUUID
-    
-    var endpoint: NSURL? {
-        return (PostController.baseURL?.URLByAppendingPathComponent("posts").URLByAppendingPathComponent(self.identifier.UUIDString).URLByAppendingPathExtension("json"))
-    }
-    
-    var jsonValue: [String: AnyObject] {
-        
-        let json: [String: AnyObject] = [
-                UsernameKey: self.username,
-                TextKey: self.text,
-                TimestampKey: self.timestamp,
-            ]
-        
-        return json
-    }
     
     init(username: String, text: String, identifier: NSUUID = NSUUID()) {
         

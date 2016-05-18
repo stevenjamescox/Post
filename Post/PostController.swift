@@ -10,47 +10,36 @@ import Foundation
 
 class PostController {
     
-    static let sharedController = PostController()
-    static let baseURL = NSURL(string: "https://devmtn-post.firebaseio.com")
     static let endpoint = NSURL(string: "https://devmtn-post.firebaseio.com/posts.json")
     
-    var posts:[Post] = [] {
+    weak var delegate: PostControllerDelegate?
+    
+    var posts: [Post] = [] {
         didSet {
-            
-            for observer in observers {
-                observer.postsUpdated(posts)
-            }
+            delegate?.postsUpdated(posts)
         }
     }
-    
-    var observers:[PostControllerObserver] = []
     
     init() {
         fetchPosts()
     }
     
-    func addPost(username: String, text: String) {
-        
-        let post = Post(username: username, text: text)
-        post.save {
-            self.fetchPosts()
-        }
-    }
+    // MARK: - Request
     
-    // MARK: - Persistence
+    func fetchPosts(completion: ((newPosts: [Post]) -> Void)? = nil) {
     
-    func fetchPosts(completion: (() -> Void)? = nil) {
+        guard let requestURL = PostController.endpoint else { fatalError("Post Endpoint url failed") }
         
-        guard let endpoint = PostController.endpoint else { fatalError("Post Endpoint url failed") }
+        NetworkController.performRequestForURL(requestURL, httpMethod: .Get, urlParameters: nil) { (data, error) in
         
-        NetworkController.performRequestForURL(endpoint, httpMethod: .Get, data: nil) { (data, error) in
+            let responseDataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
             
             guard let data = data,
                 let postDictionaries = (try? NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)) as? [String: [String: AnyObject]] else {
                     
-                    print("unable to serialize json")
+                    print("Unable to serialize JSON. \nResponse: \(responseDataString)")
                     if let completion = completion {
-                        completion()
+                        completion(newPosts: [])
                     }
                     return
             }
@@ -63,7 +52,7 @@ class PostController {
                 self.posts = sortedPosts
                 
                 if let completion = completion {
-                    completion()
+                    completion(newPosts: sortedPosts)
                 }
                 
                 return
@@ -72,7 +61,7 @@ class PostController {
     }
 }
 
-protocol PostControllerObserver {
+protocol PostControllerDelegate: class {
     
     func postsUpdated(posts: [Post])
 }
