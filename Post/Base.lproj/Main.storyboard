@@ -44,7 +44,13 @@
                             <outlet property="delegate" destination="NMz-XS-qPJ" id="fuc-c4-rWH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Post" id="2qk-h1-AIK"/>
+                    <navigationItem key="navigationItem" title="Post" id="2qk-h1-AIK">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ygx-Xj-azD">
+                            <connections>
+                                <action selector="addPostTapped:" destination="NMz-XS-qPJ" id="NFt-Ej-j7h"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="mqv-f0-JxV">
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
