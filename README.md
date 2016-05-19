@@ -44,7 +44,7 @@ It is good practice to write reusable code. Even when you do not plan to reuse t
 3. Add the following `urlFromURLParameters` function to your `NetworkController` class. This function takes a base URL, URL parameters, and returns a completed URL with the parameters in place.
     * example: To perform a Google Search, you use the URL `https://google.com/search?q=test`. 'q' and 'test' are URL parameters, with 'q' being the name, and 'test' beging the value. This function will take the base URL `https://google.com/search` and a `[String: String]` dictionary `["q":"test"]`, and return the URL `https://google.com/search?q=test`
 
-``swift
+```swift
     static func urlFromURLParameters(url: NSURL, urlParameters: [String: String]?) -> NSURL {
         
         let components = NSURLComponents(URL: url, resolvingAgainstBaseURL: true)
@@ -256,13 +256,13 @@ So you must update the `fetchPosts` function to support both of these use cases.
         * Specify that you want the last 15 posts (`limitToLast`).
 5. Determine the necessary `timestamp` for your query based on whether you are resetting the list (where you would want to use the current time), or appending to the list (where you would want to use the time of the earlier fetched `Post`).
 
-``swift
+```swift
     let queryEndInterval = reset ? NSDate().timeIntervalSince1970 : posts.last?.timestamp ?? NSDate().timeIntervalSince1970
 ```
 
 6. Build a `[String: String]` Dictionary literal of the URL Parameters you want to use.
 
-``swift
+```swift
     let urlParameters = [
         "orderBy": "\"timestamp\"",
         "endAt": "\(queryEndInterval)",
