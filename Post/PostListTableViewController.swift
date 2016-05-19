@@ -23,15 +23,20 @@ class PostListTableViewController: UITableViewController {
         postController.delegate = self
     }
     
+    @IBAction func addPostTapped(sender: AnyObject) {
+        
+        presentNewPostAlert()
+    }
+    
     @IBAction func refreshControlPulled(sender: UIRefreshControl) {
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
-        postController.fetchPosts({ (newPosts) in
+        postController.fetchPosts(reset: true) { (newPosts) in
             sender.endRefreshing()
             
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        })
+        }
     }
 
     
@@ -53,6 +58,71 @@ class PostListTableViewController: UITableViewController {
         return cell
     }
     
+    
+    // MARK: - Table view delegate
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row+1 == postController.posts.count {
+            
+            postController.fetchPosts(reset: false, completion: { (newPosts) in
+                
+                if !newPosts.isEmpty {
+                    
+                    self.tableView.reloadData()
+                }
+            })
+        }
+    }
+    
+    
+    // MARK: - Alert Controllers
+    
+    func presentNewPostAlert() {
+        let alertController = UIAlertController(title: "New Post", message: nil, preferredStyle: .Alert)
+        
+        var usernameTextField: UITextField?
+        var messageTextField: UITextField?
+        
+        alertController.addTextFieldWithConfigurationHandler { (usernameField) in
+            usernameField.placeholder = "Display name"
+            usernameTextField = usernameField
+        }
+        
+        alertController.addTextFieldWithConfigurationHandler { (messageField) in
+            
+            messageField.placeholder = "What's up?"
+            messageTextField = messageField
+        }
+        
+        let postAction = UIAlertAction(title: "Post", style: .Default) { (action) in
+            
+            guard let username = usernameTextField?.text where !username.isEmpty,
+                let text = messageTextField?.text where !text.isEmpty else {
+                    
+                    self.presentErrorAlert()
+                    return
+            }
+            
+            self.postController.addPost(username, text: text)
+        }
+        alertController.addAction(postAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func presentErrorAlert() {
+        
+        let alertController = UIAlertController(title: "Uh oh!", message: "You may be missing information or have network connectivity issues. Please try again.", preferredStyle: .Alert)
+        
+        let cancelAction = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
+        
+        alertController.addAction(cancelAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
 }
 
 extension PostListTableViewController: PostControllerDelegate {

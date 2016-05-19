@@ -10,7 +10,8 @@ import Foundation
 
 class PostController {
     
-    static let endpoint = NSURL(string: "https://devmtn-post.firebaseio.com/posts.json")
+    static let baseURL = NSURL(string: "https://devmtn-post.firebaseio.com/posts/")
+    static let endpoint = baseURL?.URLByAppendingPathExtension("json")
     
     weak var delegate: PostControllerDelegate?
     
@@ -24,13 +25,47 @@ class PostController {
         fetchPosts()
     }
     
+    // MARK: - Save Post
+    
+    func addPost(username: String, text: String) {
+        
+        let post = Post(username: username, text: text)
+        
+        guard let requestURL = post.endpoint else { fatalError("URL optional is nil") }
+        
+        NetworkController.performRequestForURL(requestURL, httpMethod: .Put, body: post.jsonData) { (data, error) in
+            
+            let responseDataString = NSString(data: data!, encoding: NSUTF8StringEncoding) ?? ""
+            
+            if error != nil {
+                print("Error: \(error)")
+            } else if responseDataString.containsString("error") {
+                print("Error: \(responseDataString)")
+            } else {
+                print("Successfully saved data to endpoint. \nResponse: \(responseDataString)")
+            }
+            
+            self.fetchPosts()
+        }
+    }
+    
     // MARK: - Request
     
-    func fetchPosts(completion: ((newPosts: [Post]) -> Void)? = nil) {
+    func fetchPosts(reset reset: Bool = true, completion: ((newPosts: [Post]) -> Void)? = nil) {
     
         guard let requestURL = PostController.endpoint else { fatalError("Post Endpoint url failed") }
         
-        NetworkController.performRequestForURL(requestURL, httpMethod: .Get, urlParameters: nil) { (data, error) in
+        let queryEndInterval = reset ? NSDate().timeIntervalSince1970 : posts.last?.queryTimestamp ?? NSDate().timeIntervalSince1970
+        
+        //TODO update to query timestamp
+        
+        let urlParameters = [
+            "orderBy": "\"timestamp\"",
+            "endAt": "\(queryEndInterval)",
+            "limitToLast": "15",
+            ]
+        
+        NetworkController.performRequestForURL(requestURL, httpMethod: .Get, urlParameters: urlParameters) { (data, error) in
         
             let responseDataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
             
@@ -49,7 +84,11 @@ class PostController {
             
             dispatch_async(dispatch_get_main_queue(), {
                 
-                self.posts = sortedPosts
+                if reset {
+                    self.posts = sortedPosts
+                } else {
+                    self.posts.appendContentsOf(sortedPosts)
+                }
                 
                 if let completion = completion {
                     completion(newPosts: sortedPosts)
