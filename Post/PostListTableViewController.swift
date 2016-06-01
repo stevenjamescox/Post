@@ -14,7 +14,8 @@ class PostListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
