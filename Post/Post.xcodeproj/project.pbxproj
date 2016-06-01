@@ -11,6 +11,9 @@
 		95A9227B1CFF844400303041 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A922791CFF844400303041 /* Main.storyboard */; };
 		95A9227D1CFF844400303041 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95A9227C1CFF844400303041 /* Assets.xcassets */; };
 		95A922881CFF84FA00303041 /* PostListTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A922871CFF84FA00303041 /* PostListTableTableViewController.swift */; };
+		95A9228C1CFF861000303041 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A9228B1CFF861000303041 /* Post.swift */; };
+		95A9228F1CFF862100303041 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A9228E1CFF862100303041 /* PostController.swift */; };
+		95A922911CFF862A00303041 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A922901CFF862A00303041 /* NetworkController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +23,9 @@
 		95A9227C1CFF844400303041 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95A922811CFF844400303041 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95A922871CFF84FA00303041 /* PostListTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListTableTableViewController.swift; sourceTree = SOURCE_ROOT; };
+		95A9228B1CFF861000303041 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		95A9228E1CFF862100303041 /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
+		95A922901CFF862A00303041 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,9 +58,11 @@
 		95A922741CFF844400303041 /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				95A922751CFF844400303041 /* AppDelegate.swift */,
-				95A922891CFF850200303041 /* View Controllers */,
 				95A9228A1CFF850D00303041 /* View */,
+				95A922891CFF850200303041 /* View Controllers */,
+				95A922921CFF862E00303041 /* Model Controller-ish */,
+				95A9228D1CFF861400303041 /* Model */,
+				95A922751CFF844400303041 /* AppDelegate.swift */,
 				95A9227C1CFF844400303041 /* Assets.xcassets */,
 				95A922811CFF844400303041 /* Info.plist */,
 			);
@@ -75,6 +83,23 @@
 				95A922791CFF844400303041 /* Main.storyboard */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		95A9228D1CFF861400303041 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				95A9228B1CFF861000303041 /* Post.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		95A922921CFF862E00303041 /* Model Controller-ish */ = {
+			isa = PBXGroup;
+			children = (
+				95A9228E1CFF862100303041 /* PostController.swift */,
+				95A922901CFF862A00303041 /* NetworkController.swift */,
+			);
+			name = "Model Controller-ish";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +173,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95A922911CFF862A00303041 /* NetworkController.swift in Sources */,
+				95A9228C1CFF861000303041 /* Post.swift in Sources */,
+				95A9228F1CFF862100303041 /* PostController.swift in Sources */,
 				95A922881CFF84FA00303041 /* PostListTableTableViewController.swift in Sources */,
 				95A922761CFF844400303041 /* AppDelegate.swift in Sources */,
 			);
