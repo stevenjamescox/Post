@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Post {
+struct Post {
     
     private let keyUsername = "username"
     private let keyText = "text"
@@ -18,13 +18,28 @@ class Post {
     let username: String
     let text: String
     let timestamp: NSTimeInterval
-    let indentifier: NSUUID
+    let identifier: NSUUID
+    
+    init(username: String, text: String, identifier: NSUUID = NSUUID()) {
+    self.username = username
+    self.text = text
+    self.timestamp = NSDate().timeIntervalSince1970
+    self.identifier = identifier
+        
+    }
 
-
-
-
-
-
-
+    init?(json: [String: AnyObject], identifier: String) {
+    guard let username = json[keyUsername] as? String,
+        let text = json[keyText] as? String,
+        let timestamp = json[keyTimestamp] as? Double,
+        let identifier = NSUUID(UUIDString: identifier)
+        else { return nil }
+        
+        self.username = username
+        self.text = text
+        self.timestamp = NSTimeInterval(floatLiteral: timestamp)
+        self.identifier = identifier
+        
+    }
 
 }
