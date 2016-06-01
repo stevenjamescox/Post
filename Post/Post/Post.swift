@@ -7,3 +7,24 @@
 //
 
 import Foundation
+
+class Post {
+    
+    private let keyUsername = "username"
+    private let keyText = "text"
+    private let keyTimestamp = "timestamp"
+    private let keyIdentifier = "identifier"
+    
+    let username: String
+    let text: String
+    let timestamp: NSTimeInterval
+    let indentifier: NSUUID
+
+
+
+
+
+
+
+
+}

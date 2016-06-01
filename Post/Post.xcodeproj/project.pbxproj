@@ -14,6 +14,7 @@
 		95A9228C1CFF861000303041 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A9228B1CFF861000303041 /* Post.swift */; };
 		95A9228F1CFF862100303041 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A9228E1CFF862100303041 /* PostController.swift */; };
 		95A922911CFF862A00303041 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A922901CFF862A00303041 /* NetworkController.swift */; };
+		95A922941CFF8AC400303041 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95A922931CFF8AC400303041 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		95A9228B1CFF861000303041 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		95A9228E1CFF862100303041 /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		95A922901CFF862A00303041 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		95A922931CFF8AC400303041 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				95A922751CFF844400303041 /* AppDelegate.swift */,
 				95A9227C1CFF844400303041 /* Assets.xcassets */,
 				95A922811CFF844400303041 /* Info.plist */,
+				95A922931CFF8AC400303041 /* Default-568h@2x.png */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 			files = (
 				95A9227D1CFF844400303041 /* Assets.xcassets in Resources */,
 				95A9227B1CFF844400303041 /* Main.storyboard in Resources */,
+				95A922941CFF8AC400303041 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
