@@ -8,32 +8,26 @@
 
 import UIKit
 
-class PostListTableTableViewController: UITableViewController {
+class PostListTableViewController: UITableViewController {
+    
+    let postController = PostController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    
+        
     }
-
-  
-
-    // MARK: - Table view data source
-
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return postController.posts.count
+
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("postCell", forIndexPath: indexPath)
+        let post = postController.posts[indexPath.row]
+        cell.textLabel?.text = post.text
+        cell.detailTextLabel?.text = "\(indexPath.row) - \(post.username) - \(NSDate (timeIntervalSince1970: post.timestamp))"
+    
         return cell
     }
-    */
-
 }

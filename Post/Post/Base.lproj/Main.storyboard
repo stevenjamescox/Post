@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Post List Table Table View Controller-->
+        <!--Post List Table View Controller-->
         <scene sceneID="Nlg-YS-kxz">
             <objects>
-                <tableViewController id="My4-yJ-pHv" customClass="PostListTableTableViewController" customModule="Post" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="My4-yJ-pHv" customClass="PostListTableViewController" customModule="Post" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="l31-qd-5cm">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
