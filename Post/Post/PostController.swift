@@ -7,3 +7,19 @@
 //
 
 import Foundation
+
+class PostController {
+    
+    static let endpoint = NSURL(string: "https://devmtn-post.firebaseio.com/posts.json")
+    
+    var posts: [Post] = []
+
+     func fetchPosts(completion: ((newPosts: [Post]) -> Void)? = nil){
+        
+        guard let requestURL = PostController.endpoint else {fatalError("URL optional is nil")}
+        
+        NetworkController.performRequestForURL(requestURL, httpMethod: .Get, urlParameters: nil) { (data, error)
+
+        }
+    }
+}
