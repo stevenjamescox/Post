@@ -20,6 +20,10 @@ class PostController {
         }
     }
     
+    init() {
+    fetchPosts()
+    }
+    
     func fetchPosts(completion: ((newPosts: [Post]) -> Void)? = nil){
         
         guard let requestURL = PostController.endpoint else {fatalError("URL optional is nil")}
